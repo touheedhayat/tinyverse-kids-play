@@ -8,25 +8,25 @@ interface TinyVerseLogoProps {
 const TinyVerseLogo = ({ size = "md", showTagline = false }: TinyVerseLogoProps) => {
   const sizeClasses = {
     sm: "text-xl",
-    md: "text-3xl",
-    lg: "text-5xl",
+    md: "text-2xl md:text-3xl",
+    lg: "text-4xl md:text-5xl",
   };
 
   const starPositions = [
-    { top: "-8px", left: "0px", delay: 0 },
-    { top: "-4px", right: "-12px", delay: 0.5 },
-    { bottom: "0px", left: "-8px", delay: 1 },
-    { top: "50%", right: "-20px", delay: 0.3 },
+    { top: "-6px", left: "0px", delay: 0 },
+    { top: "-2px", right: "-10px", delay: 0.5 },
+    { bottom: "2px", left: "-6px", delay: 1 },
+    { top: "50%", right: "-16px", delay: 0.3 },
   ];
 
   return (
     <div className="relative inline-flex flex-col items-center">
       <div className="relative">
-        {/* Twinkling Stars */}
+        {/* Twinkling Stars - Now using gold accent */}
         {starPositions.map((pos, index) => (
           <motion.span
             key={index}
-            className="absolute text-sunshine"
+            className="absolute text-accent text-xs"
             style={{
               top: pos.top,
               left: pos.left,
@@ -48,75 +48,54 @@ const TinyVerseLogo = ({ size = "md", showTagline = false }: TinyVerseLogoProps)
           </motion.span>
         ))}
 
-        {/* Orbiting Planet */}
+        {/* Orbiting Element - Subtle dot instead of emoji */}
         <motion.span
-          className="absolute text-lg"
-          style={{ top: "-15px", left: "50%" }}
+          className="absolute text-xs text-accent"
+          style={{ top: "-12px", left: "50%" }}
           animate={{
             rotate: 360,
           }}
           transition={{
-            duration: 8,
+            duration: 10,
             repeat: Infinity,
             ease: "linear",
           }}
         >
           <motion.span
-            className="inline-block"
-            style={{ transform: "translateX(25px)" }}
+            className="inline-block w-1.5 h-1.5 rounded-full bg-accent"
+            style={{ transform: "translateX(20px)" }}
             animate={{
-              scale: [1, 1.2, 1],
+              scale: [1, 1.3, 1],
             }}
             transition={{
               duration: 2,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-          >
-            🪐
-          </motion.span>
+          />
         </motion.span>
 
         {/* Main Logo Text */}
         <motion.h1
-          className={`font-fredoka font-bold ${sizeClasses[size]} relative z-10`}
-          initial={{ opacity: 0, y: 20 }}
+          className={`font-serif font-bold ${sizeClasses[size]} relative z-10 tracking-tight`}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <span className="text-foreground">Tiny</span>
-          <motion.span
-            className="text-gradient"
-            animate={{
-              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            style={{
-              background: "linear-gradient(90deg, hsl(350 100% 75%), hsl(280 60% 70%), hsl(197 71% 65%), hsl(350 100% 75%))",
-              backgroundSize: "200% 100%",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            Verse
-          </motion.span>
+          <span className="text-primary">TINY</span>
+          <span className="text-accent">VERSE</span>
         </motion.h1>
       </div>
 
       {/* Tagline */}
       {showTagline && (
         <motion.p
-          className="text-xs text-muted-foreground mt-1 font-nunito tracking-wider"
+          className="text-xs text-muted-foreground mt-1 font-sans tracking-wider"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          A tiny universe for little ones ✨
+          Premium Kids Fashion
         </motion.p>
       )}
     </div>
