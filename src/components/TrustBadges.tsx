@@ -10,39 +10,27 @@ const TrustBadges = ({ variant = "horizontal", showPrimary = true }: TrustBadges
   const badges = [
     {
       icon: Check,
-      titleUrdu: "پہلے چیک کریں",
-      titleEnglish: "First Check",
-      subtitleUrdu: "پھر ادائیگی کریں",
-      subtitleEnglish: "Then Pay",
+      title: "Check Before Pay",
+      subtitle: "Inspect your order first",
       isPrimary: true,
-      color: "bg-trust text-trust-foreground",
     },
     {
       icon: Truck,
-      titleUrdu: "مفت ڈیلیوری",
-      titleEnglish: "Free Delivery",
-      subtitleUrdu: "2000 سے اوپر",
-      subtitleEnglish: "Over Rs. 2000",
+      title: "Free Delivery",
+      subtitle: "Orders over Rs. 2,000",
       isPrimary: false,
-      color: "bg-secondary text-secondary-foreground",
     },
     {
       icon: RotateCcw,
-      titleUrdu: "آسان واپسی",
-      titleEnglish: "Easy Returns",
-      subtitleUrdu: "7 دن",
-      subtitleEnglish: "Within 7 Days",
+      title: "Easy Returns",
+      subtitle: "Within 7 days",
       isPrimary: false,
-      color: "bg-secondary text-secondary-foreground",
     },
     {
       icon: Shield,
-      titleUrdu: "کوالٹی گارنٹی",
-      titleEnglish: "Quality Guaranteed",
-      subtitleUrdu: "100% اصلی",
-      subtitleEnglish: "100% Original",
+      title: "Quality Guaranteed",
+      subtitle: "100% original products",
       isPrimary: false,
-      color: "bg-secondary text-secondary-foreground",
     },
   ];
 
@@ -50,49 +38,32 @@ const TrustBadges = ({ variant = "horizontal", showPrimary = true }: TrustBadges
 
   if (variant === "compact") {
     return (
-      <motion.div
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-trust text-trust-foreground shadow-soft"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        whileHover={{ scale: 1.05 }}
-        transition={{ duration: 0.3 }}
-      >
-        <Check className="w-5 h-5" />
-        <span className="font-semibold text-sm">
-          پہلے چیک کریں، پھر ادائیگی کریں
-        </span>
-      </motion.div>
+      <div className="inline-flex items-center gap-2 px-4 py-2 bg-trust/10 text-trust rounded-full">
+        <Check className="w-4 h-4" />
+        <span className="text-sm font-medium">Check Before Pay</span>
+      </div>
     );
   }
 
   if (variant === "vertical") {
     return (
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-4">
         {filteredBadges.map((badge, index) => (
           <motion.div
             key={index}
-            className={`flex items-center gap-3 p-3 rounded-xl ${
-              badge.isPrimary ? badge.color : "bg-card"
-            } shadow-card`}
+            className={`flex items-center gap-4 p-4 rounded-lg ${
+              badge.isPrimary ? "bg-trust/10 border border-trust/20" : "bg-secondary"
+            }`}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
-            whileHover={{ scale: 1.02, x: 5 }}
           >
-            <div
-              className={`p-2 rounded-full ${
-                badge.isPrimary ? "bg-white/20" : "bg-primary/10"
-              }`}
-            >
-              <badge.icon
-                className={`w-5 h-5 ${
-                  badge.isPrimary ? "text-white" : "text-primary"
-                }`}
-              />
+            <div className={`p-2 rounded-full ${badge.isPrimary ? "bg-trust/20" : "bg-primary/10"}`}>
+              <badge.icon className={`w-5 h-5 ${badge.isPrimary ? "text-trust" : "text-primary"}`} />
             </div>
             <div>
-              <p className="font-semibold text-sm">{badge.titleEnglish}</p>
-              <p className="text-xs opacity-80">{badge.subtitleEnglish}</p>
+              <p className="font-medium text-foreground">{badge.title}</p>
+              <p className="text-sm text-muted-foreground">{badge.subtitle}</p>
             </div>
           </motion.div>
         ))}
@@ -102,43 +73,27 @@ const TrustBadges = ({ variant = "horizontal", showPrimary = true }: TrustBadges
 
   // Horizontal variant (default)
   return (
-    <div className="w-full overflow-x-auto scrollbar-hide">
-      <div className="flex items-center justify-center gap-4 md:gap-8 py-4 min-w-max px-4">
-        {filteredBadges.map((badge, index) => (
-          <motion.div
-            key={index}
-            className={`flex items-center gap-3 px-4 py-3 rounded-2xl ${
-              badge.isPrimary
-                ? "bg-trust text-trust-foreground shadow-lg"
-                : "bg-card shadow-card"
-            }`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            whileHover={{
-              scale: 1.05,
-              y: -3,
-            }}
-          >
-            <div
-              className={`p-2.5 rounded-full ${
-                badge.isPrimary ? "bg-white/20" : "bg-primary/10"
-              }`}
+    <div className="w-full border-y border-border py-6 bg-secondary/30">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {filteredBadges.map((badge, index) => (
+            <motion.div
+              key={index}
+              className="flex items-center gap-3"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
             >
-              <badge.icon
-                className={`w-5 h-5 ${
-                  badge.isPrimary ? "text-white" : "text-primary"
-                }`}
-              />
-            </div>
-            <div className="text-left">
-              <p className="font-bold text-sm leading-tight">
-                {badge.titleUrdu}
-              </p>
-              <p className="text-xs opacity-90">{badge.subtitleUrdu}</p>
-            </div>
-          </motion.div>
-        ))}
+              <div className={`p-2 rounded-full ${badge.isPrimary ? "bg-trust/10" : "bg-primary/5"}`}>
+                <badge.icon className={`w-5 h-5 ${badge.isPrimary ? "text-trust" : "text-primary"}`} />
+              </div>
+              <div>
+                <p className="text-sm font-medium text-foreground">{badge.title}</p>
+                <p className="text-xs text-muted-foreground">{badge.subtitle}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );

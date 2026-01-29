@@ -5,6 +5,7 @@ import CategorySection from "@/components/CategorySection";
 import ProductGrid from "@/components/ProductGrid";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import SpecialOfferBanner from "@/components/SpecialOfferBanner";
+import TrustBadges from "@/components/TrustBadges";
 
 const Index = () => {
   return (
@@ -12,8 +13,11 @@ const Index = () => {
       <Header />
       
       <main>
-        {/* Hero Section with Trust Badge */}
+        {/* Hero Section */}
         <HeroSection />
+
+        {/* Trust Badges */}
+        <TrustBadges />
 
         {/* Featured Categories */}
         <CategorySection />
@@ -21,7 +25,7 @@ const Index = () => {
         {/* New Arrivals */}
         <ProductGrid
           title="New Arrivals"
-          subtitle="Fresh styles just landed! Be the first to shop our latest collection."
+          subtitle="Discover our latest styles, fresh from our design studio"
           filter="new"
           limit={4}
           viewAllLink="/new-arrivals"
@@ -31,10 +35,10 @@ const Index = () => {
         <SpecialOfferBanner />
 
         {/* Best Sellers */}
-        <div className="bg-muted/20">
+        <div className="bg-secondary/20">
           <ProductGrid
             title="Best Sellers"
-            subtitle="Our most loved items by parents and kids alike."
+            subtitle="Our most loved pieces, trusted by parents everywhere"
             filter="bestSeller"
             limit={4}
             viewAllLink="/category/all?sort=popular"
@@ -46,8 +50,8 @@ const Index = () => {
 
         {/* Featured Products */}
         <ProductGrid
-          title="Featured Collection"
-          subtitle="Handpicked favorites for your little ones."
+          title="Editor's Picks"
+          subtitle="Handpicked favorites for your little ones"
           filter="featured"
           limit={8}
           viewAllLink="/category/all"
