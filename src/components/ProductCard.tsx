@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Heart, ShoppingCart, Eye } from "lucide-react";
-import { Product } from "@/types";
+import { Heart, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
-import { toast } from "@/hooks/use-toast";
+import { Product } from "@/types";
 
 interface ProductCardProps {
   product: Product;
@@ -20,183 +18,119 @@ const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
-    e.stopPropagation();
     addToCart(
       product,
       1,
       product.sizes[0]?.size || "One Size",
       product.colors[0]?.name || "Default"
     );
-    toast({
-      title: "Added to Cart! 🛒",
-      description: `${product.title} has been added to your cart.`,
-    });
   };
 
-  const handleWishlist = (e: React.MouseEvent) => {
+  const handleWishlistToggle = (e: React.MouseEvent) => {
     e.preventDefault();
-    e.stopPropagation();
     if (inWishlist) {
       removeFromWishlist(product.id);
-      toast({
-        title: "Removed from Wishlist",
-        description: `${product.title} has been removed from your wishlist.`,
-      });
     } else {
       addToWishlist(product);
-      toast({
-        title: "Added to Wishlist! ❤️",
-        description: `${product.title} has been added to your wishlist.`,
-      });
     }
   };
-
-  const discountPercentage = product.salePrice
-    ? Math.round(((product.price - product.salePrice) / product.price) * 100)
-    : 0;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.4 }}
-      whileHover={{ y: -5 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.05 }}
       className="group"
     >
       <Link to={`/product/${product.id}`}>
-        <div className="bg-card rounded-2xl overflow-hidden shadow-card hover:shadow-hover transition-all duration-300">
-          {/* Image Container */}
-          <div className="relative aspect-[3/4] overflow-hidden bg-muted">
-            <img
-              src={product.images[0]}
-              alt={product.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
+        <div className="relative overflow-hidden bg-secondary/30 aspect-[3/4] mb-4">
+          <img
+            src={product.images[0]}
+            alt={product.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
 
-            {/* Badges */}
-            <div className="absolute top-3 left-3 flex flex-col gap-2">
-              {product.isNew && (
-                <Badge className="bg-sky-blue text-foreground font-bold">
-                  NEW
-                </Badge>
-              )}
-              {product.salePrice && (
-                <Badge className="bg-coral text-white font-bold">
-                  -{discountPercentage}%
-                </Badge>
-              )}
-              {product.isBestSeller && (
-                <Badge className="bg-sunshine text-foreground font-bold">
-                  BEST SELLER
-                </Badge>
-              )}
-            </div>
-
-            {/* Quick Actions */}
-            <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={handleWishlist}
-                className={`p-2 rounded-full shadow-md transition-colors ${
-                  inWishlist
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-white text-foreground hover:bg-primary hover:text-primary-foreground"
-                }`}
-              >
-                <Heart className={`w-4 h-4 ${inWishlist ? "fill-current" : ""}`} />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="p-2 rounded-full bg-white text-foreground hover:bg-secondary shadow-md transition-colors"
-              >
-                <Eye className="w-4 h-4" />
-              </motion.button>
-            </div>
-
-            {/* Add to Cart Button */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileHover={{ opacity: 1, y: 0 }}
-              className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            >
-              <Button
-                onClick={handleAddToCart}
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-2 rounded-xl"
-              >
-                <ShoppingCart className="w-4 h-4" />
-                Add to Cart
-              </Button>
-            </motion.div>
+          {/* Badges */}
+          <div className="absolute top-3 left-3 flex flex-col gap-2">
+            {product.isNew && (
+              <span className="bg-primary text-primary-foreground text-xs font-medium px-2.5 py-1">
+                NEW
+              </span>
+            )}
+            {product.salePrice && (
+              <span className="bg-destructive text-destructive-foreground text-xs font-medium px-2.5 py-1">
+                SALE
+              </span>
+            )}
           </div>
 
-          {/* Product Info */}
-          <div className="p-4">
-            <p className="text-xs text-muted-foreground capitalize mb-1">
-              {product.category}
-            </p>
-            <h3 className="font-semibold text-foreground line-clamp-1 mb-1">
-              {product.title}
-            </h3>
-            {product.titleUrdu && (
-              <p className="text-sm text-muted-foreground mb-2" dir="rtl">
-                {product.titleUrdu}
-              </p>
-            )}
+          {/* Wishlist Button */}
+          <button
+            onClick={handleWishlistToggle}
+            className={`absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
+              inWishlist 
+                ? "bg-primary text-primary-foreground" 
+                : "bg-background/90 text-foreground hover:bg-primary hover:text-primary-foreground"
+            }`}
+          >
+            <Heart className={`w-4 h-4 ${inWishlist ? "fill-current" : ""}`} />
+          </button>
 
-            {/* Color Options */}
-            <div className="flex gap-1 mb-3">
+          {/* Quick Add */}
+          <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+            <Button 
+              onClick={handleAddToCart}
+              className="w-full gap-2"
+              size="sm"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              Add to Bag
+            </Button>
+          </div>
+        </div>
+
+        {/* Product Info */}
+        <div className="space-y-1">
+          <h3 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2">
+            {product.title}
+          </h3>
+          
+          <div className="flex items-center gap-2">
+            {product.salePrice ? (
+              <>
+                <span className="text-sm font-semibold text-foreground">
+                  Rs. {product.salePrice.toLocaleString()}
+                </span>
+                <span className="text-sm text-muted-foreground line-through">
+                  Rs. {product.price.toLocaleString()}
+                </span>
+              </>
+            ) : (
+              <span className="text-sm font-semibold text-foreground">
+                Rs. {product.price.toLocaleString()}
+              </span>
+            )}
+          </div>
+
+          {/* Colors */}
+          {product.colors.length > 1 && (
+            <div className="flex items-center gap-1 pt-1">
               {product.colors.slice(0, 4).map((color) => (
                 <div
                   key={color.name}
-                  className="w-4 h-4 rounded-full border-2 border-white shadow-sm"
+                  className="w-3 h-3 rounded-full border border-border"
                   style={{ backgroundColor: color.hex }}
                   title={color.name}
                 />
               ))}
               {product.colors.length > 4 && (
-                <span className="text-xs text-muted-foreground">
+                <span className="text-xs text-muted-foreground ml-1">
                   +{product.colors.length - 4}
                 </span>
               )}
             </div>
-
-            {/* Price */}
-            <div className="flex items-center gap-2">
-              {product.salePrice ? (
-                <>
-                  <span className="font-bold text-lg text-coral">
-                    Rs. {product.salePrice.toLocaleString()}
-                  </span>
-                  <span className="text-sm text-muted-foreground line-through">
-                    Rs. {product.price.toLocaleString()}
-                  </span>
-                </>
-              ) : (
-                <span className="font-bold text-lg text-foreground">
-                  Rs. {product.price.toLocaleString()}
-                </span>
-              )}
-            </div>
-
-            {/* Size Options */}
-            <div className="flex gap-1 mt-2">
-              {product.sizes.slice(0, 3).map((size) => (
-                <span
-                  key={size.size}
-                  className="text-xs px-2 py-1 bg-muted rounded-md"
-                >
-                  {size.size}
-                </span>
-              ))}
-              {product.sizes.length > 3 && (
-                <span className="text-xs px-2 py-1 text-muted-foreground">
-                  +{product.sizes.length - 3}
-                </span>
-              )}
-            </div>
-          </div>
+          )}
         </div>
       </Link>
     </motion.div>

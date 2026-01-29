@@ -18,8 +18,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        fredoka: ["Fredoka", "sans-serif"],
-        nunito: ["Nunito", "sans-serif"],
+        serif: ["Playfair Display", "serif"],
+        sans: ["Inter", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -65,27 +65,18 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // TinyVerse Brand Colors
-        "baby-pink": {
-          DEFAULT: "hsl(var(--baby-pink))",
-          light: "hsl(var(--baby-pink-light))",
+        // Brand Colors
+        navy: {
+          DEFAULT: "hsl(var(--navy))",
+          light: "hsl(var(--navy-light))",
+          dark: "hsl(var(--navy-dark))",
         },
-        "sky-blue": {
-          DEFAULT: "hsl(var(--sky-blue))",
-          light: "hsl(var(--sky-blue-light))",
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          light: "hsl(var(--gold-light))",
         },
-        "mint-green": {
-          DEFAULT: "hsl(var(--mint-green))",
-          light: "hsl(var(--mint-green-light))",
-        },
-        lavender: {
-          DEFAULT: "hsl(var(--lavender))",
-          light: "hsl(var(--lavender-light))",
-        },
-        cream: "hsl(var(--cream))",
-        peach: "hsl(var(--peach))",
-        coral: "hsl(var(--coral))",
-        sunshine: "hsl(var(--sunshine))",
+        rose: "hsl(var(--rose))",
+        sage: "hsl(var(--sage))",
         trust: {
           DEFAULT: "hsl(var(--trust))",
           foreground: "hsl(var(--trust-foreground))",
@@ -103,9 +94,6 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        xl: "calc(var(--radius) + 4px)",
-        "2xl": "calc(var(--radius) + 8px)",
-        "3xl": "calc(var(--radius) + 12px)",
       },
       keyframes: {
         "accordion-down": {
@@ -116,30 +104,10 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        wiggle: {
-          "0%, 100%": { transform: "rotate(-3deg)" },
-          "50%": { transform: "rotate(3deg)" },
-        },
-        "pulse-soft": {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.8" },
-        },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        wiggle: "wiggle 0.5s ease-in-out",
-        "pulse-soft": "pulse-soft 2s ease-in-out infinite",
-        shimmer: "shimmer 2s linear infinite",
-      },
-      boxShadow: {
-        soft: "var(--shadow-soft)",
-        card: "var(--shadow-card)",
-        hover: "var(--shadow-hover)",
       },
     },
   },
