@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, ShoppingBag, Heart, Menu, X, User } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
+import TinyVerseLogo from "./TinyVerseLogo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,9 +48,7 @@ const Header = () => {
 
             {/* Logo */}
             <Link to="/" className="flex items-center">
-              <h1 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-primary">
-                TINYVERSE
-              </h1>
+              <TinyVerseLogo size="md" />
             </Link>
 
             {/* Desktop Navigation */}
