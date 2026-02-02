@@ -5,24 +5,24 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className="bg-secondary/30">
+      <div className="px-4 md:px-8 lg:px-12 py-16 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
-          <div className="lg:col-span-1">
-            <Link to="/" className="inline-block mb-4">
-              <h2 className="text-2xl font-serif font-bold">TINYVERSE</h2>
+          <div>
+            <Link to="/" className="inline-block mb-6">
+              <h2 className="text-2xl font-serif italic text-foreground">TinyVerse</h2>
             </Link>
-            <p className="text-sm text-primary-foreground/70 mb-6 max-w-xs">
-              Premium children's fashion for the little ones who deserve the best. 
-              Quality, comfort, and style in every piece.
+            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+              Premium children's fashion crafted with love, 
+              designed for comfort, and made to last.
             </p>
             <div className="flex gap-4">
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Facebook className="w-5 h-5" />
               </a>
@@ -30,7 +30,7 @@ const Footer = () => {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -38,7 +38,7 @@ const Footer = () => {
                 href="https://wa.me/923001234567"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <MessageCircle className="w-5 h-5" />
               </a>
@@ -47,30 +47,35 @@ const Footer = () => {
 
           {/* Shop */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider mb-4">Shop</h3>
+            <h3 className="text-xs tracking-wider uppercase text-foreground mb-6">Shop</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/new-arrivals" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/category/all" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  All Products
+                </Link>
+              </li>
+              <li>
+                <Link to="/new-arrivals" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   New Arrivals
                 </Link>
               </li>
               <li>
-                <Link to="/category/girls" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/category/girls" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   Girls
                 </Link>
               </li>
               <li>
-                <Link to="/category/boys" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/category/boys" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   Boys
                 </Link>
               </li>
               <li>
-                <Link to="/category/baby" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/category/baby" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   Baby
                 </Link>
               </li>
               <li>
-                <Link to="/category/sale" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/category/sale" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   Sale
                 </Link>
               </li>
@@ -79,31 +84,31 @@ const Footer = () => {
 
           {/* Help */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider mb-4">Help</h3>
+            <h3 className="text-xs tracking-wider uppercase text-foreground mb-6">Help</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/size-guide" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/size-guide" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   Size Guide
                 </Link>
               </li>
               <li>
-                <Link to="/shipping" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Shipping & Delivery
+                <Link to="/shipping" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Shipping
                 </Link>
               </li>
               <li>
-                <Link to="/returns" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Returns & Exchanges
+                <Link to="/returns" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Returns
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link to="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Contact Us
+                <Link to="/contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Contact
                 </Link>
               </li>
             </ul>
@@ -111,15 +116,15 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider mb-4">Contact</h3>
-            <ul className="space-y-3 text-sm text-primary-foreground/70">
+            <h3 className="text-xs tracking-wider uppercase text-foreground mb-6">Contact</h3>
+            <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
-                <a href="tel:+923001234567" className="hover:text-primary-foreground transition-colors">
+                <a href="tel:+923001234567" className="hover:text-foreground transition-colors">
                   +92 300 1234567
                 </a>
               </li>
               <li>
-                <a href="mailto:hello@tinyverse.pk" className="hover:text-primary-foreground transition-colors">
+                <a href="mailto:hello@tinyverse.pk" className="hover:text-foreground transition-colors">
                   hello@tinyverse.pk
                 </a>
               </li>
@@ -131,17 +136,17 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-primary-foreground/10">
+        <div className="mt-16 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-primary-foreground/60">
+            <p className="text-xs text-muted-foreground">
               © {currentYear} TinyVerse. All rights reserved.
             </p>
             <div className="flex gap-6">
-              <Link to="/privacy" className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors">
+              <Link to="/privacy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors">
-                Terms of Service
+              <Link to="/terms" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                Terms
               </Link>
             </div>
           </div>
@@ -150,10 +155,10 @@ const Footer = () => {
 
       {/* WhatsApp Floating Button */}
       <a
-        href="https://wa.me/923001234567?text=Hi! I'm interested in your kids fashion products."
+        href="https://wa.me/923001234567?text=Hi! I'm interested in your products."
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-trust text-trust-foreground p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow"
       >
         <MessageCircle className="w-6 h-6" />
       </a>

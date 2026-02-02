@@ -13,11 +13,19 @@ const Index = () => {
       <Header />
       
       <main>
-        {/* Hero Section */}
+        {/* Full-Screen Hero Slider */}
         <HeroSection />
 
         {/* Trust Badges */}
         <TrustBadges />
+
+        {/* Best Sellers */}
+        <ProductGrid
+          title="Best Sellers"
+          filter="bestSeller"
+          limit={4}
+          viewAllLink="/category/all?sort=popular"
+        />
 
         {/* Featured Categories */}
         <CategorySection />
@@ -25,25 +33,13 @@ const Index = () => {
         {/* New Arrivals */}
         <ProductGrid
           title="New Arrivals"
-          subtitle="Discover our latest styles, fresh from our design studio"
           filter="new"
           limit={4}
           viewAllLink="/new-arrivals"
         />
 
-        {/* Special Offer Banner */}
+        {/* Editorial Grid */}
         <SpecialOfferBanner />
-
-        {/* Best Sellers */}
-        <div className="bg-secondary/20">
-          <ProductGrid
-            title="Best Sellers"
-            subtitle="Our most loved pieces, trusted by parents everywhere"
-            filter="bestSeller"
-            limit={4}
-            viewAllLink="/category/all?sort=popular"
-          />
-        </div>
 
         {/* Why Choose Us */}
         <WhyChooseUs />
@@ -51,7 +47,6 @@ const Index = () => {
         {/* Featured Products */}
         <ProductGrid
           title="Editor's Picks"
-          subtitle="Handpicked favorites for your little ones"
           filter="featured"
           limit={8}
           viewAllLink="/category/all"
