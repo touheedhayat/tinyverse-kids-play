@@ -12,6 +12,8 @@ import InstagramGallery from "@/components/InstagramGallery";
 import NewsletterSection from "@/components/NewsletterSection";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
+import FeaturedStorySection from "@/components/FeaturedStorySection";
+import DualCollectionBanner from "@/components/DualCollectionBanner";
 
 const Index = () => {
   return (
@@ -39,6 +41,9 @@ const Index = () => {
           viewAllLink="/category/all?sort=popular"
         />
 
+        {/* Featured Story Section - Brand Story */}
+        <FeaturedStorySection />
+
         {/* Featured Categories */}
         <CategorySection />
 
@@ -49,6 +54,9 @@ const Index = () => {
           limit={4}
           viewAllLink="/new-arrivals"
         />
+
+        {/* Dual Collection Banner - Boys & Girls */}
+        <DualCollectionBanner />
 
         {/* Editorial Grid */}
         <SpecialOfferBanner />
