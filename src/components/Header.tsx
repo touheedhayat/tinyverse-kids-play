@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ShoppingBag, Heart, Menu, X, User } from "lucide-react";
+import { Search, ShoppingBag, Heart, Menu, X, ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
-import TinyVerseLogo from "./TinyVerseLogo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,10 +14,11 @@ const Header = () => {
   const { items: wishlistItems } = useWishlist();
 
   const navLinks = [
-    { name: "New Arrivals", path: "/new-arrivals" },
+    { name: "Shop All", path: "/category/all" },
     { name: "Girls", path: "/category/girls" },
     { name: "Boys", path: "/category/boys" },
     { name: "Baby", path: "/category/baby" },
+    { name: "New Arrivals", path: "/new-arrivals" },
     { name: "Sale", path: "/category/sale" },
   ];
 
@@ -27,52 +27,69 @@ const Header = () => {
   return (
     <>
       {/* Announcement Bar */}
-      <div className="bg-primary text-primary-foreground text-center py-2.5 text-sm font-medium tracking-wide">
-        <span>FREE SHIPPING ON ORDERS OVER RS. 2,000</span>
-        <span className="mx-3">|</span>
-        <span className="font-semibold">CHECK BEFORE YOU PAY</span>
+      <div className="bg-primary text-primary-foreground text-center py-2 text-xs tracking-widest uppercase">
+        Free Shipping on Orders Over Rs. 2,000 | Check Before You Pay
       </div>
 
-      <header className="sticky top-0 z-50 bg-background border-b border-border">
-        <div className="container mx-auto">
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm">
+        <div className="px-4 md:px-8 lg:px-12">
           {/* Main Header */}
           <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Mobile Menu Toggle */}
-            <button
-              className="md:hidden p-2 -ml-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            {/* Left - Navigation (Desktop) / Menu (Mobile) */}
+            <div className="flex items-center gap-8">
+              <button
+                className="lg:hidden p-2 -ml-2"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
 
-            {/* Logo */}
-            <Link to="/" className="flex items-center">
-              <TinyVerseLogo size="md" />
+              <nav className="hidden lg:flex items-center gap-6">
+                {navLinks.slice(0, 4).map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`text-xs tracking-wider uppercase transition-colors hover:text-muted-foreground ${
+                      location.pathname === link.path
+                        ? "text-foreground"
+                        : "text-foreground/70"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
+            {/* Center - Logo */}
+            <Link to="/" className="absolute left-1/2 -translate-x-1/2">
+              <h1 className="text-2xl md:text-3xl font-serif font-normal tracking-wide text-foreground italic">
+                TinyVerse
+              </h1>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`text-sm font-medium tracking-wide uppercase transition-colors hover:text-primary ${
-                    location.pathname === link.path
-                      ? "text-primary"
-                      : "text-foreground/70"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
+            {/* Right - Actions */}
+            <div className="flex items-center gap-4">
+              <nav className="hidden lg:flex items-center gap-6 mr-4">
+                {navLinks.slice(4).map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`text-xs tracking-wider uppercase transition-colors hover:text-muted-foreground ${
+                      location.pathname === link.path
+                        ? "text-foreground"
+                        : "text-foreground/70"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </nav>
 
-            {/* Actions */}
-            <div className="flex items-center gap-1 md:gap-2">
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="p-2.5 hover:bg-secondary rounded-full transition-colors"
+                className="p-2 hover:opacity-70 transition-opacity"
                 aria-label="Search"
               >
                 <Search className="w-5 h-5" />
@@ -80,11 +97,11 @@ const Header = () => {
 
               <Link
                 to="/wishlist"
-                className="p-2.5 hover:bg-secondary rounded-full transition-colors relative"
+                className="p-2 hover:opacity-70 transition-opacity relative"
               >
                 <Heart className="w-5 h-5" />
                 {wishlistItems.length > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-primary text-primary-foreground text-[10px] font-bold rounded-full flex items-center justify-center">
+                  <span className="absolute top-0 right-0 w-4 h-4 bg-foreground text-background text-[10px] font-medium rounded-full flex items-center justify-center">
                     {wishlistItems.length}
                   </span>
                 )}
@@ -92,49 +109,42 @@ const Header = () => {
 
               <Link
                 to="/cart"
-                className="p-2.5 hover:bg-secondary rounded-full transition-colors relative"
+                className="p-2 hover:opacity-70 transition-opacity relative"
               >
                 <ShoppingBag className="w-5 h-5" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-primary text-primary-foreground text-[10px] font-bold rounded-full flex items-center justify-center">
+                  <span className="absolute top-0 right-0 w-4 h-4 bg-foreground text-background text-[10px] font-medium rounded-full flex items-center justify-center">
                     {totalItems}
                   </span>
                 )}
               </Link>
-
-              <Link
-                to="/admin"
-                className="hidden md:flex p-2.5 hover:bg-secondary rounded-full transition-colors"
-              >
-                <User className="w-5 h-5" />
-              </Link>
             </div>
           </div>
-
-          {/* Search Bar */}
-          <AnimatePresence>
-            {isSearchOpen && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                className="border-t border-border overflow-hidden"
-              >
-                <div className="py-4">
-                  <div className="relative max-w-xl mx-auto">
-                    <Input
-                      type="text"
-                      placeholder="Search for products..."
-                      className="w-full h-12 pl-12 pr-4 text-base border-primary/20 focus:border-primary"
-                      autoFocus
-                    />
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
+
+        {/* Search Bar */}
+        <AnimatePresence>
+          {isSearchOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="border-t border-border overflow-hidden"
+            >
+              <div className="py-6 px-4 md:px-8">
+                <div className="relative max-w-md mx-auto">
+                  <Input
+                    type="text"
+                    placeholder="Search products..."
+                    className="w-full h-12 pl-4 pr-12 text-sm border-0 border-b border-foreground/20 rounded-none bg-transparent focus-visible:ring-0 focus-visible:border-foreground"
+                    autoFocus
+                  />
+                  <Search className="absolute right-0 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Mobile Navigation */}
         <AnimatePresence>
@@ -143,18 +153,18 @@ const Header = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden border-t border-border overflow-hidden bg-background"
+              className="lg:hidden border-t border-border overflow-hidden bg-background"
             >
-              <nav className="py-4">
+              <nav className="py-6 px-4">
                 {navLinks.map((link) => (
                   <Link
                     key={link.path}
                     to={link.path}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`block px-4 py-3 text-sm font-medium tracking-wide uppercase transition-colors ${
+                    className={`block py-3 text-sm tracking-wider uppercase transition-colors border-b border-border/50 ${
                       location.pathname === link.path
-                        ? "text-primary bg-secondary"
-                        : "text-foreground/70 hover:text-primary hover:bg-secondary/50"
+                        ? "text-foreground"
+                        : "text-foreground/60 hover:text-foreground"
                     }`}
                   >
                     {link.name}
@@ -163,7 +173,7 @@ const Header = () => {
                 <Link
                   to="/admin"
                   onClick={() => setIsMenuOpen(false)}
-                  className="block px-4 py-3 text-sm font-medium tracking-wide uppercase text-foreground/70 hover:text-primary hover:bg-secondary/50"
+                  className="block py-3 text-sm tracking-wider uppercase text-foreground/60 hover:text-foreground"
                 >
                   Admin
                 </Link>

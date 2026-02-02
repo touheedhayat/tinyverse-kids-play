@@ -1,74 +1,71 @@
 import { motion } from "framer-motion";
-import { CheckCircle, Truck, RotateCcw, Shield, Award, Heart } from "lucide-react";
-
-const features = [
-  {
-    icon: CheckCircle,
-    title: "Check Before You Pay",
-    description: "Inspect your order at delivery. Only pay when you're 100% satisfied.",
-  },
-  {
-    icon: Award,
-    title: "Premium Quality",
-    description: "Carefully selected fabrics that are soft, durable, and safe for children.",
-  },
-  {
-    icon: Truck,
-    title: "Free Shipping",
-    description: "Complimentary delivery on all orders over Rs. 2,000 nationwide.",
-  },
-  {
-    icon: RotateCcw,
-    title: "Easy Returns",
-    description: "Not quite right? Return within 7 days for a full refund.",
-  },
-  {
-    icon: Shield,
-    title: "Secure Shopping",
-    description: "Your information is protected with industry-standard security.",
-  },
-  {
-    icon: Heart,
-    title: "Customer Care",
-    description: "Dedicated support team ready to help via WhatsApp or email.",
-  },
-];
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-16 md:py-24 bg-primary text-primary-foreground">
-      <div className="container mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
-            Why Choose TinyVerse
-          </h2>
-          <p className="text-primary-foreground/80 max-w-lg mx-auto">
-            We're committed to providing the best shopping experience for parents and children alike
-          </p>
-        </motion.div>
+    <section className="py-20 md:py-28 bg-secondary/50">
+      <div className="px-4 md:px-8 lg:px-12">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-serif italic text-foreground mb-6">
+              Why TinyVerse
+            </h2>
+            <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+              We believe every child deserves clothing that's as thoughtful as they are. 
+              Our pieces are crafted with premium materials, designed for comfort and durability, 
+              and made to inspire joy in everyday moments.
+            </p>
+          </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-16">
             <motion.div
-              key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: 0.1 }}
               className="text-center"
             >
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary-foreground/10 mb-4">
-                <feature.icon className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-              <p className="text-sm text-primary-foreground/70">{feature.description}</p>
+              <h3 className="text-lg font-serif italic text-foreground mb-3">
+                Premium Quality
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                100% organic cotton and sustainable materials for gentle, long-lasting wear.
+              </p>
             </motion.div>
-          ))}
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-center"
+            >
+              <h3 className="text-lg font-serif italic text-foreground mb-3">
+                Check Before Pay
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Inspect your order at delivery. Only pay when you're completely satisfied.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-center"
+            >
+              <h3 className="text-lg font-serif italic text-foreground mb-3">
+                Timeless Design
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Classic styles that transcend seasons and grow with your child's journey.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

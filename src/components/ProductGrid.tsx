@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import ProductCard from "./ProductCard";
 import { sampleProducts } from "@/data/products";
 
@@ -41,44 +39,52 @@ const ProductGrid = ({
 
   return (
     <section className="py-16 md:py-20">
-      <div className="container mx-auto">
-        {/* Section Header */}
+      <div className="px-4 md:px-8 lg:px-12">
+        {/* Section Header - Centered, Minimal */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10"
+          className="text-center mb-12"
         >
-          <div>
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground">
-              {title}
-            </h2>
-            {subtitle && (
-              <p className="text-muted-foreground mt-2 max-w-md">{subtitle}</p>
-            )}
-          </div>
-
-          {showViewAll && (
-            <Link to={viewAllLink}>
-              <Button variant="ghost" className="gap-2 group text-sm font-medium">
-                View All
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
+          <h2 className="text-2xl md:text-3xl font-serif italic text-foreground">
+            {title}
+          </h2>
+          {subtitle && (
+            <p className="text-sm text-muted-foreground mt-3 max-w-md mx-auto">
+              {subtitle}
+            </p>
           )}
         </motion.div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12">
           {products.map((product, index) => (
             <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
 
+        {/* View All Link */}
+        {showViewAll && products.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <Link
+              to={viewAllLink}
+              className="inline-block text-sm tracking-wider uppercase border-b border-foreground pb-1 hover:opacity-70 transition-opacity"
+            >
+              View All
+            </Link>
+          </motion.div>
+        )}
+
         {/* Empty State */}
         {products.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-muted-foreground">No products found in this category.</p>
+            <p className="text-muted-foreground">No products found.</p>
           </div>
         )}
       </div>
