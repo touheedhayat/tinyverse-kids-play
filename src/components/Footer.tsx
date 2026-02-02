@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { Facebook, Instagram, MessageCircle, CreditCard, Banknote } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+
+  const socialLinks = [
+    { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+    { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+    { icon: MessageCircle, href: "https://wa.me/923001234567", label: "WhatsApp" },
+  ];
 
   return (
     <footer className="bg-secondary/30">
@@ -17,31 +24,24 @@ const Footer = () => {
               Premium children's fashion crafted with love, 
               designed for comfort, and made to last.
             </p>
+            {/* Animated Social Icons */}
             <div className="flex gap-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="https://wa.me/923001234567"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <MessageCircle className="w-5 h-5" />
-              </a>
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  whileHover={{ scale: 1.2, y: -2 }}
+                  whileTap={{ scale: 0.9 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <social.icon className="w-5 h-5" />
+                </motion.a>
+              ))}
             </div>
           </div>
 
@@ -132,6 +132,41 @@ const Footer = () => {
                 Lahore, Pakistan
               </li>
             </ul>
+
+            {/* Payment Methods */}
+            <div className="mt-6">
+              <h4 className="text-xs tracking-wider uppercase text-foreground mb-3">We Accept</h4>
+              <div className="flex gap-3">
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  className="w-10 h-7 bg-background border border-border flex items-center justify-center"
+                  title="Credit/Debit Card"
+                >
+                  <CreditCard className="w-5 h-5 text-muted-foreground" />
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  className="w-10 h-7 bg-background border border-border flex items-center justify-center"
+                  title="Cash on Delivery"
+                >
+                  <Banknote className="w-5 h-5 text-muted-foreground" />
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  className="w-10 h-7 bg-background border border-border flex items-center justify-center text-[10px] font-medium text-muted-foreground"
+                  title="EasyPaisa"
+                >
+                  EP
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  className="w-10 h-7 bg-background border border-border flex items-center justify-center text-[10px] font-medium text-muted-foreground"
+                  title="JazzCash"
+                >
+                  JC
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -153,15 +188,30 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* WhatsApp Floating Button */}
-      <a
+      {/* WhatsApp Floating Button with Pulse */}
+      <motion.a
         href="https://wa.me/923001234567?text=Hi! I'm interested in your products."
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 shadow-lg"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        animate={{
+          boxShadow: [
+            "0 0 0 0 rgba(37, 211, 102, 0.4)",
+            "0 0 0 15px rgba(37, 211, 102, 0)",
+            "0 0 0 0 rgba(37, 211, 102, 0)",
+          ],
+        }}
+        transition={{
+          boxShadow: {
+            duration: 2,
+            repeat: Infinity,
+          },
+        }}
       >
         <MessageCircle className="w-6 h-6" />
-      </a>
+      </motion.a>
     </footer>
   );
 };
