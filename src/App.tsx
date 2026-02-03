@@ -3,9 +3,10 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import CategoryPage from "./pages/CategoryPage";
-import ProductPage from "./pages/ProductPage";
+import OeufHome from "./pages/OeufHome";
+import OeufCollectionPage from "./pages/OeufCollectionPage";
+import OeufProductPage from "./pages/OeufProductPage";
+import OeufAboutPage from "./pages/OeufAboutPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -23,14 +24,15 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          {/* Customer Routes */}
-          <Route path="/" element={<Index />} />
-          <Route path="/category/:slug" element={<CategoryPage />} />
-          <Route path="/product/:id" element={<ProductPage />} />
+          {/* Customer Routes - Oeuf Style */}
+          <Route path="/" element={<OeufHome />} />
+          <Route path="/category/:slug" element={<OeufCollectionPage />} />
+          <Route path="/product/:id" element={<OeufProductPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/new-arrivals" element={<CategoryPage />} />
-          <Route path="/sale" element={<CategoryPage />} />
+          <Route path="/new-arrivals" element={<OeufCollectionPage />} />
+          <Route path="/sale" element={<OeufCollectionPage />} />
+          <Route path="/about" element={<OeufAboutPage />} />
           
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminDashboard />} />
