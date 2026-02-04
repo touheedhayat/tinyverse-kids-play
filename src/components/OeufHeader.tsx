@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, Heart, ShoppingBag, User, ChevronDown, X, Menu } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
+import TinyVerseLogo from "@/components/TinyVerseLogo";
 
 interface NavItem {
   name: string;
@@ -121,14 +122,7 @@ const OeufHeader = () => {
           <div className="flex items-center justify-between h-20 px-6 lg:px-10">
             {/* Left: Logo */}
             <Link to="/" className="flex-shrink-0">
-              <div className="flex flex-col items-start">
-                <h1 className="text-3xl font-serif font-normal tracking-wide italic text-foreground">
-                  TinyVerse
-                </h1>
-                <span className="text-[10px] font-sans italic tracking-wider text-muted-foreground -mt-1">
-                  be good
-                </span>
-              </div>
+              <TinyVerseLogo size="md" showTagline />
             </Link>
 
             {/* Center: Navigation */}

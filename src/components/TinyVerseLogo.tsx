@@ -3,102 +3,77 @@ import { motion } from "framer-motion";
 interface TinyVerseLogoProps {
   size?: "sm" | "md" | "lg";
   showTagline?: boolean;
+  variant?: "default" | "light" | "dark";
 }
 
-const TinyVerseLogo = ({ size = "md", showTagline = false }: TinyVerseLogoProps) => {
+const TinyVerseLogo = ({ size = "md", showTagline = false, variant = "default" }: TinyVerseLogoProps) => {
   const sizeClasses = {
-    sm: "text-xl",
-    md: "text-2xl md:text-3xl",
-    lg: "text-4xl md:text-5xl",
+    sm: "text-lg",
+    md: "text-xl md:text-2xl",
+    lg: "text-3xl md:text-4xl",
   };
 
-  const starPositions = [
-    { top: "-6px", left: "0px", delay: 0 },
-    { top: "-2px", right: "-10px", delay: 0.5 },
-    { bottom: "2px", left: "-6px", delay: 1 },
-    { top: "50%", right: "-16px", delay: 0.3 },
-  ];
+  const variantClasses = {
+    default: { primary: "text-foreground", accent: "text-accent" },
+    light: { primary: "text-white", accent: "text-white/80" },
+    dark: { primary: "text-foreground", accent: "text-accent" },
+  };
+
+  const colors = variantClasses[variant];
 
   return (
-    <div className="relative inline-flex flex-col items-center">
+    <motion.div 
+      className="relative inline-flex flex-col items-center cursor-pointer"
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+    >
       <div className="relative">
-        {/* Twinkling Stars - Now using gold accent */}
-        {starPositions.map((pos, index) => (
-          <motion.span
-            key={index}
-            className="absolute text-accent text-xs"
-            style={{
-              top: pos.top,
-              left: pos.left,
-              right: pos.right,
-              bottom: pos.bottom,
-            }}
-            animate={{
-              opacity: [1, 0.3, 1],
-              scale: [1, 0.7, 1],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              delay: pos.delay,
-              ease: "easeInOut",
-            }}
-          >
-            ✦
-          </motion.span>
-        ))}
-
-        {/* Orbiting Element - Subtle dot instead of emoji */}
-        <motion.span
-          className="absolute text-xs text-accent"
-          style={{ top: "-12px", left: "50%" }}
-          animate={{
-            rotate: 360,
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          <motion.span
-            className="inline-block w-1.5 h-1.5 rounded-full bg-accent"
-            style={{ transform: "translateX(20px)" }}
-            animate={{
-              scale: [1, 1.3, 1],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        </motion.span>
+        {/* Elegant underline animation */}
+        <motion.div
+          className="absolute -bottom-1 left-0 right-0 h-px bg-accent/40"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+        />
 
         {/* Main Logo Text */}
         <motion.h1
-          className={`font-serif font-bold ${sizeClasses[size]} relative z-10 tracking-tight`}
-          initial={{ opacity: 0, y: 10 }}
+          className={`font-serif font-medium ${sizeClasses[size]} relative z-10 tracking-wide`}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <span className="text-primary">TINY</span>
-          <span className="text-accent">VERSE</span>
+          <motion.span 
+            className={`${colors.primary} italic`}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
+            Tiny
+          </motion.span>
+          <motion.span 
+            className={`${colors.accent} italic`}
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+          >
+            Verse
+          </motion.span>
         </motion.h1>
       </div>
 
       {/* Tagline */}
       {showTagline && (
         <motion.p
-          className="text-xs text-muted-foreground mt-1 font-sans tracking-wider"
+          className="text-[10px] text-muted-foreground mt-0.5 font-sans tracking-[0.2em] uppercase"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.6, duration: 0.4 }}
         >
-          Premium Kids Fashion
+          For Little Ones
         </motion.p>
       )}
-    </div>
+    </motion.div>
   );
 };
 
