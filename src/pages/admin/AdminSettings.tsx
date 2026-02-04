@@ -1,52 +1,133 @@
-import { Link } from "react-router-dom";
-import { Package, ShoppingCart, TrendingUp, Settings } from "lucide-react";
+import { motion } from "framer-motion";
+import { Save, Store, Mail, Phone, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import AdminLayout from "@/components/admin/AdminLayout";
 
-const AdminSettings = () => (
-  <div className="min-h-screen bg-muted/30">
-    <header className="bg-card border-b px-6 py-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-fredoka font-bold">TinyVerse Admin</h1>
-        <Link to="/"><Button variant="outline">View Store</Button></Link>
+const AdminSettings = () => {
+  return (
+    <AdminLayout title="Settings" subtitle="Manage your store configuration">
+      <div className="grid gap-6 max-w-2xl">
+        {/* Store Information */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+        >
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-secondary">
+                  <Store className="w-4 h-4 text-accent" />
+                </div>
+                <div>
+                  <CardTitle className="font-serif font-medium">Store Information</CardTitle>
+                  <CardDescription className="font-sans">Basic details about your store</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label className="font-sans text-sm">Store Name</Label>
+                <Input defaultValue="TinyVerse" className="font-sans" />
+              </div>
+              <div className="space-y-2">
+                <Label className="font-sans text-sm">Tagline</Label>
+                <Input defaultValue="Premium Kids Fashion" className="font-sans" />
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Contact Information */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-secondary">
+                  <Phone className="w-4 h-4 text-accent" />
+                </div>
+                <div>
+                  <CardTitle className="font-serif font-medium">Contact Details</CardTitle>
+                  <CardDescription className="font-sans">How customers can reach you</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label className="font-sans text-sm">Phone Number</Label>
+                <Input defaultValue="+92 300 1234567" className="font-sans" />
+              </div>
+              <div className="space-y-2">
+                <Label className="font-sans text-sm">WhatsApp Number</Label>
+                <Input defaultValue="+92 300 1234567" className="font-sans" />
+              </div>
+              <div className="space-y-2">
+                <Label className="font-sans text-sm">Email Address</Label>
+                <Input defaultValue="hello@tinyverse.pk" className="font-sans" />
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Social & Website */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-secondary">
+                  <Globe className="w-4 h-4 text-accent" />
+                </div>
+                <div>
+                  <CardTitle className="font-serif font-medium">Online Presence</CardTitle>
+                  <CardDescription className="font-sans">Your social media and website links</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label className="font-sans text-sm">Website URL</Label>
+                <Input defaultValue="https://tinyverse.pk" className="font-sans" />
+              </div>
+              <div className="space-y-2">
+                <Label className="font-sans text-sm">Instagram Handle</Label>
+                <Input defaultValue="@tinyverse.pk" className="font-sans" />
+              </div>
+              <div className="space-y-2">
+                <Label className="font-sans text-sm">Facebook Page</Label>
+                <Input defaultValue="facebook.com/tinyverse.pk" className="font-sans" />
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <Separator className="my-2" />
+
+        {/* Save Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          <Button className="gap-2 font-sans">
+            <Save className="w-4 h-4" />
+            Save Changes
+          </Button>
+        </motion.div>
       </div>
-    </header>
-
-    <div className="flex">
-      <aside className="w-64 bg-card border-r min-h-[calc(100vh-73px)] p-4">
-        <nav className="space-y-2">
-          {[
-            { href: "/admin", label: "Dashboard", icon: TrendingUp },
-            { href: "/admin/products", label: "Products", icon: Package },
-            { href: "/admin/orders", label: "Orders", icon: ShoppingCart },
-            { href: "/admin/settings", label: "Settings", icon: Settings },
-          ].map((item) => (
-            <Link key={item.href} to={item.href}>
-              <Button variant={item.href === "/admin/settings" ? "secondary" : "ghost"} className="w-full justify-start gap-2">
-                <item.icon className="w-4 h-4" />{item.label}
-              </Button>
-            </Link>
-          ))}
-        </nav>
-      </aside>
-
-      <main className="flex-1 p-6">
-        <h2 className="text-xl font-bold mb-6">Store Settings</h2>
-        <Card>
-          <CardHeader><CardTitle>Store Information</CardTitle></CardHeader>
-          <CardContent className="space-y-4">
-            <div><Label>Store Name</Label><Input defaultValue="TinyVerse" /></div>
-            <div><Label>Phone Number</Label><Input defaultValue="+92 300 1234567" /></div>
-            <div><Label>WhatsApp Number</Label><Input defaultValue="+92 300 1234567" /></div>
-            <div><Label>Email</Label><Input defaultValue="hello@tinyverse.pk" /></div>
-            <Button>Save Settings</Button>
-          </CardContent>
-        </Card>
-      </main>
-    </div>
-  </div>
-);
+    </AdminLayout>
+  );
+};
 
 export default AdminSettings;
