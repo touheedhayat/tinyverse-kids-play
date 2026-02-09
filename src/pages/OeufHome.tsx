@@ -9,6 +9,15 @@ import OeufFooter from "@/components/OeufFooter";
 import { sampleProducts } from "@/data/products";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
+import { motion } from "framer-motion";
+
+const SectionDivider = () => (
+  <div className="flex items-center justify-center py-6">
+    <div className="h-px w-8 bg-border" />
+    <span className="mx-3 text-accent text-xs">✦</span>
+    <div className="h-px w-8 bg-border" />
+  </div>
+);
 
 const OeufHome = () => {
   const bestSellers = sampleProducts.filter((p) => p.isBestSeller);
@@ -21,15 +30,18 @@ const OeufHome = () => {
       <OeufHeader />
 
       <main>
-        {/* Full-Screen Hero Slider */}
         <OeufHeroSlider />
 
-        {/* Best Sellers Carousel */}
+        <SectionDivider />
+
+        {/* Best Sellers */}
         <OeufProductCarousel
           title="Sustainably made best-sellers"
           products={bestSellers.length > 0 ? bestSellers : sampleProducts.slice(0, 6)}
           viewAllLink="/category/all?sort=popular"
         />
+
+        <SectionDivider />
 
         {/* Feature Banner 1 */}
         <OeufFeatureBanner
@@ -42,13 +54,15 @@ const OeufHome = () => {
           imagePosition="left"
         />
 
-        {/* Featured Products Carousel */}
+        {/* Cotton Collection */}
         <OeufAlpacaCarousel
           title="Explore our 100% cotton collection"
           viewAllLink="/category/all"
         />
 
-        {/* Feature Banner 2 - Marché Style */}
+        <SectionDivider />
+
+        {/* Feature Banner 2 */}
         <OeufFeatureBanner
           image="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=1200&q=80"
           label="NOW CURATING"
@@ -60,12 +74,14 @@ const OeufHome = () => {
           bgColor="bg-secondary"
         />
 
-        {/* Gift Collection Carousel */}
+        {/* Featured Products */}
         <OeufProductCarousel
           title="A curation of our favorite pieces"
           products={featured.length > 0 ? featured : sampleProducts.slice(0, 6)}
           viewAllLink="/category/all"
         />
+
+        <SectionDivider />
 
         {/* Instagram Gallery */}
         <OeufInstagramGallery />
